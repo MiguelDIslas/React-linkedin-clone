@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Feed } from "./Feed.style";
 import ShareButtonComponent from "../ShareButton";
-import firebase from "firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import FlipMove from "react-flip-move";
@@ -13,6 +12,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import EventIcon from "@mui/icons-material/Event";
 import ArticleIcon from "@mui/icons-material/Article";
 import PostComponent from "../Posts";
+import {  collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
@@ -23,20 +23,24 @@ const FeedComponent = () => {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    db.collection("posts").orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
+    const postsCollection = collection(db, "posts");
+    const q = query(postsCollection, orderBy('timestamp', 'desc'));
+    onSnapshot(q,(snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
-    });
+     } )
   }, []);
 
   const sendPost = (e) => {
     e.preventDefault();
-    db.collection("posts").add({
+    const postsCollection = collection(db, "posts");
+    addDoc(postsCollection, {
       name: user.displayName,
       description: user.email,
       message: inputValue,
-      photoUrl: user.photoUrl ?user.photoUrl :"",
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      photoUrl: user.photoUrl ? user.photoUrl : "",
+      timestamp: serverTimestamp(),
     });
+ 
       setInputValue('');
   };
 

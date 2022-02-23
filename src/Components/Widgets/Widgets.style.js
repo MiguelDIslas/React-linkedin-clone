@@ -9,6 +9,7 @@ export const Widget = styled.div`
   margin-top: 20px;
   position: sticky;
   color: white;
+  margin-right: 20px;
 
   .widget-header {
     display: flex;

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage = () => {
   const [state, setState] = useState({
@@ -30,22 +31,30 @@ const LoginPage = () => {
       timer: 1500,
     };
 
-    auth
-      .signInWithEmailAndPassword(state.email, state.password)
-      .catch((error) => {
-        errorMessage.title = error.message;
-        Swal.fire(errorMessage);
+    const userAuth = await signInWithEmailAndPassword(
+      auth,
+      state.email,
+      state.password
+    );
+
+    dispatch(
+      login({
+        email: userAuth.user.email,
+        uid: userAuth.user.uid,
+        displayName: userAuth.user.displayName,
+        photoUrl: userAuth.user.photoURL,
       })
-      .then((userAuth) => {
-        dispatch(
-          login({
-            email: userAuth.user.email,
-            uid: userAuth.user.uid,
-            displayName: userAuth.user.displayName,
-            photoUrl: userAuth.user.photoURL,
-          })
-        );
-      });
+    );
+
+    // auth
+    //   .signInWithEmailAndPassword(state.email, state.password)
+    //   .catch((error) => {
+    //     errorMessage.title = error.message;
+    //     Swal.fire(errorMessage);
+    //   })
+    //   .then((userAuth) => {
+
+    //   });
   };
 
   return (

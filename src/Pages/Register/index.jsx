@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const RegisterPage = () => {
   const [state, setState] = useState({
@@ -36,33 +37,27 @@ const RegisterPage = () => {
       Swal.fire(errorMessage);
     }
 
-    auth
-      .createUserWithEmailAndPassword(state.email, state.password)
-      .then((userAuth) => {
-        userAuth.user
-          .updateProfile({
-            displayName: state.name,
-            photoURL: state.photoURL,
-          })
-          .then(() => {
-            dispatch(
-              login({
-                email: userAuth.user.email,
-                uid: userAuth.user.uid,
-                displayName: state.name,
-                photoUrl: state.photoURL,
-              })
-            );
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
+    const userAuth = await createUserWithEmailAndPassword(
+      auth,
+      state.email,
+      state.password
+    );
+
+    await updateProfile(userAuth.user, {
+      displayName: state.name,
+      photoURL: state.photoURL,
+    });
+    
+    dispatch(
+      login({
+        email: userAuth.user.email,
+        uid: userAuth.user.uid,
+        displayName: state.name,
+        photoUrl: state.photoURL,
       })
-      .catch((error) => {
-        errorMessage.title = error.message;
-        Swal.fire(errorMessage);
-      });
+    );
   };
+
   return (
     <Register>
       <div className="login-div">
@@ -94,13 +89,13 @@ const RegisterPage = () => {
             type="password"
             placeholder="Password"
           />
-          <input
+          {/* <input
             onChange={handleChage}
             id="photoURL"
             name="photoURL"
             type="text"
             placeholder="Photo URL (optional)"
-          />
+          /> */}
         </form>
         <button onClick={register}>Register</button>
         <p>

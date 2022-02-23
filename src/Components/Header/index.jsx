@@ -14,6 +14,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
 const HeaderComponent = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const HeaderComponent = () => {
 
   const logoutApp = () => {
     dispatch(logout());
-    auth.signOut();
+    signOut(auth);
   }
   return (
     <Header>
