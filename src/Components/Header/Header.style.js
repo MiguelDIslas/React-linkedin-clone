@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const Header = styled.div`
   display: flex;
   justify-content: space-evenly;
-  border-bottom: 0.1px solid lightgray;
+  border-bottom: 0.1px solid hsla(0, 0%, 100%, 0.12);
   padding: 10px 0;
-  background-color: white;
+  background-color: #1d2226;
   width: 100%;
   z-index: 999;
- position: fixed!important;
- max-height: 60px;
+  position: fixed !important;
+  max-height: 60px;
 
   .header-left {
     display: flex;
@@ -21,12 +21,13 @@ export const Header = styled.div`
       border-radius: 5px;
       height: 22px;
       color: gray;
-      background-color: #eef3f5;
+      background-color: #38434f;
 
       input {
         outline: none;
         border: none;
         background: none;
+        color: hsla(0, 0%, 100%, 0.6);
       }
     }
 

@@ -6,7 +6,7 @@ const FormComponents = css`
   border-radius: 5px;
 `;
 
-export const Login = styled.div`
+export const Register = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,15 +38,15 @@ export const Login = styled.div`
       padding-left: 10px;
       margin-bottom: 10px;
     }
+  }
 
-    button {
-      ${FormComponents}
-      font-size: large;
-      color: white;
-      background-color: var(--post-blue-button);
-      cursor: pointer;
-      width: 100%;
-    }
+  button {
+    ${FormComponents}
+    font-size: large;
+    color: white;
+    background-color: var(--post-blue-button);
+    cursor: pointer;
+    width: 100%;
   }
 
   p {

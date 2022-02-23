@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Post = styled.div`
-  background-color: white;
+  background-color: var(--background-color-dark);
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -15,21 +15,23 @@ export const Post = styled.div`
 
       p {
         font-size: 12px;
-        color: gray;
+        color: var(--font-color-dark);
       }
 
       h2 {
         font-size: 15px;
+        color: white;
       }
     }
   }
 
   .post-body {
     overflow-wrap: anywhere;
+    color: white;
   }
 
   .post-buttons {
-      width: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }

@@ -7,9 +7,10 @@ export const Wrapper = styled.div`
   margin-right: 20px;
   color: gray;
   cursor: pointer;
+  color: hsla(0,0%,100%,0.6);
 
   &:hover {
-    color: black;
+    color: white;
   }
 
   .header-button-title {

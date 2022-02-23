@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Feed } from "./Feed.style";
 import ShareButtonComponent from "../ShareButton";
+import firebase from "firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+import FlipMove from "react-flip-move";
+
 //Icons
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -9,9 +14,11 @@ import EventIcon from "@mui/icons-material/Event";
 import ArticleIcon from "@mui/icons-material/Article";
 import PostComponent from "../Posts";
 import { db } from "../../firebase";
-import firebase from "firebase";
+
 
 const FeedComponent = () => {
+  const user = useSelector(selectUser);
+
   const [posts, setPosts] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -24,10 +31,10 @@ const FeedComponent = () => {
   const sendPost = (e) => {
     e.preventDefault();
     db.collection("posts").add({
-      name: "Miguel",
-      description: "Test",
+      name: user.displayName,
+      description: user.email,
       message: inputValue,
-      photoUrl: "",
+      photoUrl: user.photoUrl ?user.photoUrl :"",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
       setInputValue('');
@@ -74,17 +81,19 @@ const FeedComponent = () => {
       </div>
 
       {/* Post  */}
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => {
-        return (
-          <PostComponent
-            key={id}
-            name={name}
-            description={description}
-            message={message}
-            photoUrl={photoUrl}
-          />
-        );
-      })}
+      <FlipMove>
+        {posts.map(({ id, data: { name, description, message, photoUrl } }) => {
+          return (
+            <PostComponent
+              key={id}
+              name={name}
+              description={description}
+              message={message}
+              photoUrl={photoUrl}
+            />
+          );
+        })}
+      </FlipMove>
     </Feed>
   );
 };

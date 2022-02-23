@@ -5,11 +5,6 @@ const BorderTopRadius = css`
   border-top-right-radius: 10px;
 `;
 
-const BorderGrayBgWhite = css`
-  border: 1px solid lightgray;
-  background-color: white;
-`;
-
 export const Sidebar = styled.div`
   position: sticky;
   top: 80px;
@@ -24,12 +19,10 @@ export const Sidebar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid lightgray;
-    background-color: white;
+    background-color: var(--background-color-dark);
     border-bottom: 0;
     padding-bottom: 10px;
     ${BorderTopRadius};
-    ${BorderGrayBgWhite}
 
     img {
       margin-bottom: -20px;
@@ -45,10 +38,11 @@ export const Sidebar = styled.div`
 
     h2 {
       font-size: 18px;
+      color: white;
     }
 
     h4 {
-      color: gray;
+      color: var(--font-color-dark);
       font-size: 12px;
     }
   }
@@ -59,7 +53,7 @@ export const Sidebar = styled.div`
     margin-bottom: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    ${BorderGrayBgWhite}
+    background-color: var(--background-color-dark);
 
     .siderbar-stat {
       margin-top: 10px;
@@ -67,25 +61,26 @@ export const Sidebar = styled.div`
       justify-content: space-between;
 
       p {
-        color: gray;
+        color: white;
         font-size: 13px;
         font-weight: 600;
       }
 
       .siderbar-stat-number {
         font-weight: bold;
-        color: #0a66c2 !important;
+        color: var(--post-blue);
       }
     }
   }
 
   /* Siderbar bottom */
   .siderbar-bottom {
+    background-color: var(--background-color-dark);
     text-align: left;
     padding: 10px;
-    ${BorderGrayBgWhite}
     border-radius: 10px;
     margin-top: 10px;
+    color: white;
 
     p {
       font-size: 13px;

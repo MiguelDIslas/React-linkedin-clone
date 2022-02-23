@@ -4,13 +4,13 @@ export const Feed = styled.div`
   flex: 0.6;
   margin: 20px 20px 0 20px;
 
-
   .feed-input-container {
-    background-color: white;
+    background-color: var(--background-color-dark);
     padding: 10px;
     padding-bottom: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    position: sticky;
 
     .feed-input {
       border: 1px solid lightgray;
@@ -30,6 +30,8 @@ export const Feed = styled.div`
           margin-left: 10px;
           outline-width: 0;
           font-weight: 600;
+          background-color: transparent;
+          color: white;
         }
 
         button {
@@ -38,9 +40,9 @@ export const Feed = styled.div`
       }
     }
 
-    .feed-input-options{
-        display:flex;
-        justify-content: space-evenly;
+    .feed-input-options {
+      display: flex;
+      justify-content: space-evenly;
     }
   }
 `;

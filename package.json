@@ -14,9 +14,12 @@
     "firebase": "^8.6.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-flip-move": "^3.0.4",
     "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "sweetalert2": "^11.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
